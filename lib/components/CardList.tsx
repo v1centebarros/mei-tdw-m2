@@ -2,6 +2,7 @@
 import {useSuspenseQuery} from "@tanstack/react-query";
 import {cardOptions} from "@/lib/hooks/useCards";
 import {useState} from "react";
+import {Card} from "@/lib/components/Card";
 
 export function CardList() {
     const [page, setPage] = useState(1);
@@ -13,7 +14,7 @@ export function CardList() {
             <ul>
                 {data.map((card) => (
                     <li key={card.id}>
-                        {card.name}
+                        <Card card={card} />
                     </li>
                 ))}
             </ul>
