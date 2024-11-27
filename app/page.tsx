@@ -7,7 +7,7 @@ import {CardList} from "@/lib/components/CardList";
 export default function Home() {
     const queryClient = getQueryClient();
 
-    void queryClient.prefetchQuery(cardOptions);
+    void queryClient.prefetchQuery(cardOptions(1));
 
 
     return (

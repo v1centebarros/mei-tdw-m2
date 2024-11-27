@@ -2,8 +2,10 @@
 
 import {HydrationBoundary, QueryClientProvider} from "@tanstack/react-query";
 import React from "react";
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
 import {getQueryClient} from "@/lib/getQueryClient";
+import {NuqsAdapter} from "nuqs/adapters/next/app";
+
 export default function Providers({
                                       children,
                                   }: Readonly<{
@@ -11,12 +13,13 @@ export default function Providers({
 }>) {
 
     const queryClient = getQueryClient();
-    return (
-        <QueryClientProvider client={queryClient}>
-            <HydrationBoundary queryClient={queryClient}>
-                {children}
-            </HydrationBoundary>
-            <ReactQueryDevtools/>
-        </QueryClientProvider>
+    return (<NuqsAdapter>
+            <QueryClientProvider client={queryClient}>
+                <HydrationBoundary queryClient={queryClient}>
+                    {children}
+                </HydrationBoundary>
+                <ReactQueryDevtools/>
+            </QueryClientProvider>
+        </NuqsAdapter>
     );
 }
