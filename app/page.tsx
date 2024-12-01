@@ -2,7 +2,7 @@ import {getQueryClient} from "@/lib/getQueryClient";
 import {cardOptions} from "@/lib/hooks/useCards";
 import {dehydrate, HydrationBoundary} from "@tanstack/react-query";
 import React from "react";
-import {CardList} from "@/lib/components/CardList";
+import {CardSearch} from "@/components/CardSearch";
 
 export default function Home() {
     const queryClient = getQueryClient();
@@ -14,7 +14,7 @@ export default function Home() {
         <main>
             <h1>Cards List</h1>
             <HydrationBoundary state={dehydrate(queryClient)}>
-                <CardList />
+                <CardSearch />
             </HydrationBoundary>
         </main>
     );

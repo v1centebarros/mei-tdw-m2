@@ -3,10 +3,10 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                protocol: 'http',
-                hostname: 'gatherer.wizards.com',
+                protocol: 'https',
+                hostname: 'cards.scryfall.io',
                 port: '',
-                pathname: '/Handlers/Image.ashx',
+                pathname: '',
             }
         ]
     }
