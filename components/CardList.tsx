@@ -1,31 +1,29 @@
 "use client";
-import {useSuspenseQuery} from "@tanstack/react-query";
-import {cardOptions} from "@/lib/hooks/useCards";
-import {useState} from "react";
-import {Card} from "@/components/Card";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { cardOptions } from "@/lib/hooks/useCards";
+import { useState } from "react";
+import { Card } from "@/components/Card";
 
 export function CardList() {
-    const [page, setPage] = useState(1);
-    const {data} = useSuspenseQuery(cardOptions(page));
+  const [page, setPage] = useState(1);
+  const { data } = useSuspenseQuery(cardOptions(page));
 
-    return (
-        <div>
-            <button onClick={() => setPage(page + 1)}>Load More</button>
-            <ul>
-                {data.map((card) => (
-                    <li key={card.id}>
-                        <Card card={card} />
-                    </li>
-                ))}
-            </ul>
+  return (
+    <div>
+      <button onClick={() => setPage(page + 1)}>Load More</button>
+      <ul>
+        {data.map((card) => (
+          <li key={card.id}>
+            <Card card={card} />
+          </li>
+        ))}
+      </ul>
 
-            <ul>
-                {data.map((card) => (
-                    <li key={card.id}>
-                        {card.name}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+      <ul>
+        {data.map((card) => (
+          <li key={card.id}>{card.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
