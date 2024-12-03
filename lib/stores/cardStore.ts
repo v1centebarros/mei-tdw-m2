@@ -40,6 +40,6 @@ export const createCardStore = (initState: CardState = initCardStore()) => {
       wantToBuyCards: state.wantToBuyCards.filter((item) => item !== card)
     }))
   }), {
-    name: "magic-cards-storage" // Storage key
+    name: "magic-cards-storage"
   }));
 };

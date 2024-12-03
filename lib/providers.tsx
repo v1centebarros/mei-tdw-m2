@@ -7,6 +7,7 @@ import { getQueryClient } from "@/lib/getQueryClient";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ThemeProvider } from "@/lib/providers/ThemeProvider";
 import { CardStoreProvider } from "@/lib/providers/CardStoreProvider";
+import { DeckStoreProvider } from "@/lib/providers/DeckStoreProvider";
 
 export default function Providers({
                                     children
@@ -24,9 +25,11 @@ export default function Providers({
       <NuqsAdapter>
         <QueryClientProvider client={queryClient}>
           <CardStoreProvider>
-            <HydrationBoundary queryClient={queryClient}>
-              {children}
-            </HydrationBoundary>
+            <DeckStoreProvider>
+              <HydrationBoundary queryClient={queryClient}>
+                {children}
+              </HydrationBoundary>
+            </DeckStoreProvider>
             <ReactQueryDevtools />
           </CardStoreProvider>
         </QueryClientProvider>

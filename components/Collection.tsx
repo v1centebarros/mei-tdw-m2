@@ -17,10 +17,7 @@ import { useCardStore } from "@/lib/providers/CardStoreProvider";
 
 export function Collection() {
 
-  const favoriteCards = useCardStore((state) => state.favoriteCards);
-  const wantToBuyCards = useCardStore((state) => state.wantToBuyCards);
-  const ownedCards = useCardStore((state) => state.ownedCards);
-
+  const {favoriteCards, wantToBuyCards, ownedCards} = useCardStore(state => state);
   return (
     <Drawer>
       <DrawerTrigger className={"underline-offset-2 hover:underline"}>
