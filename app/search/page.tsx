@@ -52,7 +52,7 @@ export default function Page() {
 
   const { data, isLoading, isSuccess } = useQuery(searchOptions(query));
 
-  return (<main className={"m-2"}>, unique, sort, prefer
+  return (<main className={"m-2"}>
     <h1 className="text-2xl font-bold mb-4">Advanced Search</h1>
 
     <div className={"flex flex-row flex-wrap gap-y-2"}>
@@ -99,6 +99,7 @@ export default function Page() {
         step={1}
         label={(value) => value}
         onValueChange={(value) => setPower(value)}
+        className={"w-full p-y-5"}
       />
 
       <DualRangeSlider

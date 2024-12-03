@@ -95,7 +95,7 @@ export default async function Page({ searchParams }: Readonly<PageProps>) {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <div className={"mx-auto"}>
               {cardData.image_uris ? (
-                <img
+                <Image
                   src={cardData.image_uris.normal}
                   alt={cardData.name}
                   width={350}
