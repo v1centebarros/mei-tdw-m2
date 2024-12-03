@@ -27,8 +27,9 @@ const fetchAutoComplete = async (q: string): Promise<Array<string>> => {
   return data.data;
 };
 
-const fetchCard = async (name: string): Promise<Card> => {
+const fetchCard = async (name: string, id:string): Promise<Card> => {
   const response = await fetch(
+    id ? `https://api.scryfall.com/cards/${id}` :
     `https://api.scryfall.com/cards/named?fuzzy=${name}`,
   );
   const data = await response.json();

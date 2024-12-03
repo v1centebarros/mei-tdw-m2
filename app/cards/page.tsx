@@ -61,8 +61,8 @@ const parseText = (text: string, allSymbols: CardSymbol[]) => {
   });
 };
 export default async function Page({ searchParams }: Readonly<PageProps>) {
-  const { name } = await searchParamsCache.parse(searchParams);
-  const cardData = await fetchCard(name);
+  const { name, id } = await searchParamsCache.parse(searchParams);
+  const cardData = await fetchCard(name, id);
   const symbolsData = await fetchSymbols();
 
   return (
