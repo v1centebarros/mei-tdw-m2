@@ -48,7 +48,7 @@ export function CardSearch() {
   };
 
   const handleResultClick = (result: string) => {
-    setQuery(result);
+    setQuery("");
     setShowResults(false);
     inputRef.current?.focus();
     router.push(`/cards?name=${result}`);

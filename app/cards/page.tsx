@@ -71,7 +71,7 @@ export default async function Page({ searchParams }: Readonly<PageProps>) {
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className={`text-3xl`}>{cardData.name}<CardToggle card={cardData}/></CardTitle>
+            <CardTitle className={`text-3xl`}>{cardData.name}</CardTitle>
             <CardDescription className={"hover:underline underline-offset-2"}>
               {cardData.type_line}
             </CardDescription>
@@ -151,6 +151,7 @@ export default async function Page({ searchParams }: Readonly<PageProps>) {
             Released: {cardData.released_at}
           </Link>
         </div>
+        <CardToggle card={cardData}/>
         <div className="text-right">
           <p className="text-sm font-semibold">
             Price (MTGO): {cardData.prices.tix} tix

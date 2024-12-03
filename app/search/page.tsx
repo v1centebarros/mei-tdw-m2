@@ -12,6 +12,7 @@ import { parseAsString } from "nuqs/server";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DualRangeSlider } from "@/components/ui/dual-range-slider";
 import { Spinner } from "@/components/ui/spinner";
+import CardContextMenu from "@/components/CardContextMenu";
 
 export default function Page() {
 
@@ -133,12 +134,15 @@ export default function Page() {
     </div>
     <div className="mt-4">
       <h2 className="text-xl font-semibold">Search Results:</h2>
-      {isLoading && <Spinner/>}
+      {isLoading && <Spinner />}
       {isSuccess && <>
 
         {data?.length > 0 ? <div className={"grid grid-cols-6 gap-2"}>
-          {data?.map((card: CardType) => <Card card={card} key={card.id} />)
-          }</div> : <p>No results found</p>}
+          {data?.map((card: CardType) =>
+            <CardContextMenu card={card} key={card.id}>
+              <Card card={card} key={card.id} />
+            </CardContextMenu>)}
+        </div> : <p>No results found</p>}
       </>}
     </div>
   </main>);
