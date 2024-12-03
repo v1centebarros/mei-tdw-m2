@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { autoCompleteOptions } from "@/lib/hooks/useCards";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Spinner } from "@/components/ui/spinner";
 
 export function CardSearch() {
   const [query, setQuery] = useState("");
@@ -91,7 +92,7 @@ export function CardSearch() {
           id="search-results"
           className="absolute z-10 mt-1 max-h-60 w-full overflow-y-auto rounded-md border bg-white shadow-lg"
         >
-          {isLoading && <li className="px-4 py-2 text-gray-500">Loading...</li>}
+          {isLoading && <Spinner/>}
           {isError && (
             <li className="px-4 py-2 text-red-500">
               Error:{" "}

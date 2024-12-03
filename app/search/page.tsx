@@ -11,6 +11,7 @@ import { parseAsArrayOf, parseAsInteger, useQueryState } from "nuqs";
 import { parseAsString } from "nuqs/server";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DualRangeSlider } from "@/components/ui/dual-range-slider";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function Page() {
 
@@ -132,7 +133,7 @@ export default function Page() {
     </div>
     <div className="mt-4">
       <h2 className="text-xl font-semibold">Search Results:</h2>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Spinner/>}
       {isSuccess && <>
 
         {data?.length > 0 ? <div className={"grid grid-cols-6 gap-2"}>
