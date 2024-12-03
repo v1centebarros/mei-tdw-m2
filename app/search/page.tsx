@@ -1,14 +1,6 @@
 "use client";
 import { useMemo } from "react";
-import {
-  cardRarity,
-  cardTypes,
-  colors,
-  formatLegalities,
-  preferTypes,
-  sortTypes,
-  uniqueTypes
-} from "@/lib/primitives";
+import { cardRarity, cardTypes, colors, formatLegalities } from "@/lib/primitives";
 import { searchOptions } from "@/lib/hooks/useSearch";
 import { useQuery } from "@tanstack/react-query";
 import { Card as CardType } from "@/lib/types/card";
@@ -35,55 +27,36 @@ export default function Page() {
   const [prefer, setPrefer] = useQueryState("prefer", parseAsString.withDefault(""));
 
   const query = useMemo(() => {
-    let query = "";
+    const parts = [];
+
     if (selectedCardTypes.length > 0) {
-      query += "t:" + selectedCardTypes.join("+t:");
-    }
-    if (selectedCardTypes.length > 0 && selectedColors.length > 0) {
-      query += "+";
+      parts.push("t:" + selectedCardTypes.join("+t:"));
     }
     if (selectedColors.length > 0) {
-      query += "c:" + selectedColors.join(" ");
+      parts.push("c:" + selectedColors.join(" "));
     }
-
     if (selectedRarity.length > 0) {
-      query += "+r:" + selectedRarity;
+      parts.push("r:" + selectedRarity);
     }
-
     if (power[0] !== 0 || power[1] !== 10) {
-      query += `+pow>=${power[0]}+pow<=${power[1]}`;
+      parts.push(`pow>=${power[0]}+pow<=${power[1]}`);
     }
-
     if (year[0] !== 1993 || year[1] !== 2024) {
-      query += `+year>=${year[0]}+year<=${year[1]}`;
+      parts.push(`year>=${year[0]}+year<=${year[1]}`);
     }
-
     if (price[0] !== 0 || price[1] !== 800) {
-      query += `+usd>=${price[0]}+usd<=${price[1]}`;
+      parts.push(`usd>=${price[0]}+usd<=${price[1]}`);
     }
-
     if (legalities.length > 0) {
-      query += "+f:" + legalities.join("+f:");
+      parts.push("f:" + legalities.join("+f:"));
     }
-
-    if (unique.length > 0) {
-      query += "+unique:" + unique;
-    }
-
-    if (sort.length > 0) {
-      query += "+order:" + sort;
-    }
-
-    if (prefer.length > 0) {
-      query += "+prefer:" + prefer;
-    }
-    return query;
-  }, [selectedColors, selectedCardTypes, selectedRarity, power, year, price, legalities, unique, sort, prefer]);
+    return parts.join("+");
+  }, [selectedColors, selectedCardTypes, selectedRarity, power, year, price, legalities]);
 
 
   const { data, isLoading, isSuccess } = useQuery(searchOptions(query));
 
-  return (<main className={"m-2"}>
+  return (<main className={"m-2"}>, unique, sort, prefer
     <h1 className="text-2xl font-bold mb-4">Advanced Search</h1>
 
     <div className={"flex flex-row flex-wrap gap-y-2"}>
@@ -159,45 +132,6 @@ export default function Page() {
         animation={0}
         maxCount={3}
       />
-
-      <Select onValueChange={setUnique} value={unique}>
-        <SelectTrigger className="h-full">
-          <SelectValue placeholder="Select Unique" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {uniqueTypes.map((unique) => (<SelectItem key={unique.value} value={unique.value}>
-              {unique.label}
-            </SelectItem>))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-
-      <Select onValueChange={setSort} value={sort}>
-        <SelectTrigger className="h-full">
-          <SelectValue placeholder="Select Sort" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {sortTypes.map((sort) => (<SelectItem key={sort.label} value={sort.value}>
-              {sort.label}
-            </SelectItem>))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-
-      <Select onValueChange={setPrefer} value={prefer}>
-        <SelectTrigger className="h-full">
-          <SelectValue placeholder="Select Order" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {preferTypes.map((prefer) => (<SelectItem key={prefer.label} value={prefer.value}>
-              {prefer.label}
-            </SelectItem>))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
     </div>
     <div className="mt-4">
       <h2 className="text-xl font-semibold">Search Results:</h2>
