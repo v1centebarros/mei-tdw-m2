@@ -16,6 +16,7 @@ import { Settings } from 'lucide-react'
 import { CardSearch } from "@/components/CardSearch";
 import Image from "next/image";
 import { ModeToggle } from "@/components/ModeToggle";
+import { Collection } from "@/components/Collection";
 
 export function Navbar() {
   return (
@@ -33,9 +34,11 @@ export function Navbar() {
         <Link href="/search" className="text-foreground hover:underline underline-offset-2">
           Advanced Search
         </Link>
+        <Collection />
         <Link href="/about" className="text-foreground hover:underline underline-offset-2">
           About
         </Link>
+
         <div className="relative">
           <CardSearch />
         </div>

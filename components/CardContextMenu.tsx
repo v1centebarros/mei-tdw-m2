@@ -20,7 +20,6 @@ export default function CardContextMenu({ card, children }: Readonly<{ card: Car
   return (<ContextMenu>
     <ContextMenuTrigger>{children}</ContextMenuTrigger>
     <ContextMenuContent>
-
       <ContextMenuCheckboxItem checked={!!isFavorite} onClick={handleFavoriteClick}>
         Favorite
         <ContextMenuShortcut><Heart size={16} strokeWidth={1} /></ContextMenuShortcut>
