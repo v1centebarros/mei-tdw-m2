@@ -10,6 +10,7 @@ import { fetchSymbols } from "@/lib/hooks/useSymbols";
 import { CardSymbol } from "@/lib/types/symbol";
 import Link from "next/link";
 import { CardToggle } from "@/components/CardToggle";
+import PriceDisplayer from "@/components/PriceDisplayer";
 
 type PageProps = {
   searchParams: Promise<SearchParams>;
@@ -68,6 +69,7 @@ export default async function Page({ searchParams }: Readonly<PageProps>) {
 
   return (<div className="container mx-auto py-8">
     <Suspense>
+      {JSON.stringify(cardData)}
       <Card className="mx-auto w-full max-w-4xl">
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -154,9 +156,7 @@ export default async function Page({ searchParams }: Readonly<PageProps>) {
           </div>
           <CardToggle card={cardData} />
           <div className="text-right">
-            <p className="text-sm font-semibold">
-              Price (MTGO): {cardData.prices.tix} tix
-            </p>
+            <PriceDisplayer prices={cardData.prices} />
             <a
               href={cardData.scryfall_uri}
               target="_blank"
