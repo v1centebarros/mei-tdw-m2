@@ -13,7 +13,7 @@ import {
   DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu"
 import { Settings } from 'lucide-react'
-import { CardSearch } from "@/components/CardSearch";
+import { SearchBar } from "@/components/SearchBar";
 import Image from "next/image";
 import { ModeToggle } from "@/components/ModeToggle";
 import { Collection } from "@/components/Collection";
@@ -25,22 +25,19 @@ export function Navbar() {
         <Image src={"/logo.png"} alt={"Magic The Gathering"} width={256} height={74} />
       </Link>
       <div className="flex items-center space-x-4">
-        <Link href="/deck-builder" className="text-foreground hover:underline underline-offset-2">
+        <Link href="/builder" className="text-foreground hover:underline underline-offset-2">
           Deck Builder
         </Link>
-        <Link href="/card-comparison" className="text-foreground hover:underline underline-offset-2">
+        <Link href="/comparison" className="text-foreground hover:underline underline-offset-2">
           Card Comparison
         </Link>
+        <Collection />
         <Link href="/search" className="text-foreground hover:underline underline-offset-2">
           Advanced Search
         </Link>
-        <Collection />
-        <Link href="/about" className="text-foreground hover:underline underline-offset-2">
-          About
-        </Link>
 
         <div className="relative">
-          <CardSearch />
+          <SearchBar />
         </div>
       </div>
       <div className="flex items-center space-x-4">
