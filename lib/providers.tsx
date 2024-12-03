@@ -5,7 +5,8 @@ import React from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { getQueryClient } from "@/lib/getQueryClient";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider } from "@/lib/providers/ThemeProvider";
+import { CardStoreProvider } from "@/lib/providers/CardStoreProvider";
 
 export default function Providers({
                                     children
@@ -22,10 +23,12 @@ export default function Providers({
     >
       <NuqsAdapter>
         <QueryClientProvider client={queryClient}>
-          <HydrationBoundary queryClient={queryClient}>
-            {children}
-          </HydrationBoundary>
-          <ReactQueryDevtools />
+          <CardStoreProvider>
+            <HydrationBoundary queryClient={queryClient}>
+              {children}
+            </HydrationBoundary>
+            <ReactQueryDevtools />
+          </CardStoreProvider>
         </QueryClientProvider>
       </NuqsAdapter>
     </ThemeProvider>
