@@ -12,9 +12,10 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu"
-import { Settings, ChevronRight } from 'lucide-react'
+import { Settings } from 'lucide-react'
 import { CardSearch } from "@/components/CardSearch";
 import Image from "next/image";
+import { ModeToggle } from "@/components/ModeToggle";
 
 export function Navbar() {
   return (
@@ -78,6 +79,7 @@ export function Navbar() {
             </DropdownMenuSub>
           </DropdownMenuContent>
         </DropdownMenu>
+        <ModeToggle />
       </div>
     </nav>
   )
