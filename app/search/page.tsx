@@ -53,10 +53,10 @@ export default function Page() {
 
   const { data, isLoading, isSuccess } = useQuery(searchOptions(query));
 
-  return (<main className={"m-2"}>
+  return (<main className={"m-2 container mx-auto"}>
     <h1 className="text-2xl font-bold mb-4">Advanced Search</h1>
 
-    <div className={"flex flex-row flex-wrap gap-y-2"}>
+    <div className={"grid grid-cols-3 gap-x-2 gap-y-10"}>
       <MultiSelect
         options={colors}
         onValueChange={setSelectedColors}
