@@ -69,7 +69,6 @@ export default async function Page({ searchParams }: Readonly<PageProps>) {
 
   return (<div className="container mx-auto py-8">
     <Suspense>
-      {JSON.stringify(cardData)}
       <Card className="mx-auto w-full max-w-4xl">
         <CardHeader>
           <div className="flex items-center justify-between">
