@@ -695,39 +695,39 @@ export const formatLegalities: RarityType[] = [
   { label: 'Brawl', value: 'brawl'}
 ]
 
-export const uniqueTypes: RarityType[] = [
-  { label: 'Cards', value: 'cards'},
-  { label: 'Prints', value: 'prints'},
-  { label: 'Art', value: 'art'}
-]
-
-export const sortTypes: RarityType[] = [
-  { label: 'Artist', value: 'artist'},
-  { label: 'CMC', value: 'cmc'},
-  { label: 'Power', value: 'power'},
-  { label: 'Toughness', value: 'toughness'},
-  { label: 'Set', value: 'set'},
-  { label: 'Name', value: 'name'},
-  { label: 'USD', value: 'usd'},
-  { label: 'TIX', value: 'tix'},
-  { label: 'EUR', value: 'eur'},
-  { label: 'Rarity', value: 'rarity'},
-  { label: 'Color', value: 'color'},
-  { label: 'Released', value: 'released'},
-  { label: 'Spoiled', value: 'spoiled'},
-  { label: 'EDHREC', value: 'edhrec'},
-  { label: 'Penny', value: 'penny'},
-  { label: 'Review', value: 'review'}
-]
-
-export const preferTypes: RarityType[] = [
-  { label: 'Oldest', value: 'oldest'},
-  { label: 'Newest', value: 'newest'},
-  { label: 'USD Low', value: 'usd-low'},
-  { label: 'USD High', value: 'usd-high'},
-  { label: 'TIX Low', value: 'tix-low'},
-  { label: 'TIX High', value: 'tix-high'},
-  { label: 'EUR Low', value: 'eur-low'},
-  { label: 'EUR High', value: 'eur-high'},
-  { label: 'Promo', value: 'promo'}
-]
+// export const uniqueTypes: RarityType[] = [
+//   { label: 'Cards', value: 'cards'},
+//   { label: 'Prints', value: 'prints'},
+//   { label: 'Art', value: 'art'}
+// ]
+//
+// export const sortTypes: RarityType[] = [
+//   { label: 'Artist', value: 'artist'},
+//   { label: 'CMC', value: 'cmc'},
+//   { label: 'Power', value: 'power'},
+//   { label: 'Toughness', value: 'toughness'},
+//   { label: 'Set', value: 'set'},
+//   { label: 'Name', value: 'name'},
+//   { label: 'USD', value: 'usd'},
+//   { label: 'TIX', value: 'tix'},
+//   { label: 'EUR', value: 'eur'},
+//   { label: 'Rarity', value: 'rarity'},
+//   { label: 'Color', value: 'color'},
+//   { label: 'Released', value: 'released'},
+//   { label: 'Spoiled', value: 'spoiled'},
+//   { label: 'EDHREC', value: 'edhrec'},
+//   { label: 'Penny', value: 'penny'},
+//   { label: 'Review', value: 'review'}
+// ]
+//
+// export const preferTypes: RarityType[] = [
+//   { label: 'Oldest', value: 'oldest'},
+//   { label: 'Newest', value: 'newest'},
+//   { label: 'USD Low', value: 'usd-low'},
+//   { label: 'USD High', value: 'usd-high'},
+//   { label: 'TIX Low', value: 'tix-low'},
+//   { label: 'TIX High', value: 'tix-high'},
+//   { label: 'EUR Low', value: 'eur-low'},
+//   { label: 'EUR High', value: 'eur-high'},
+//   { label: 'Promo', value: 'promo'}
+// ]

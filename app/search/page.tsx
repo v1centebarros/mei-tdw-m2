@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { DualRangeSlider } from "@/components/ui/dual-range-slider";
 import { Spinner } from "@/components/ui/spinner";
 import CardContextMenu from "@/components/CardContextMenu";
+import Container from "@/components/Container";
 
 export default function Page() {
 
@@ -54,97 +55,100 @@ export default function Page() {
 
   const { data, isLoading, isSuccess } = useQuery(searchOptions(query));
 
-  return (<main className={"m-2 container mx-auto"}>
-    <h1 className="text-2xl font-bold mb-4">Advanced Search</h1>
-
-    <div className={"grid grid-cols-3 gap-x-2 gap-y-10"}>
-      <MultiSelect
-        options={colors}
-        onValueChange={setSelectedColors}
-        defaultValue={selectedColors}
-        placeholder="Select Colors"
-        variant="default"
-        animation={0}
-        maxCount={3}
-      />
+  return (<Container title={"Advanced Search"}>
 
 
-      <MultipleSelector
-        defaultOptions={cardTypes}
-        onChange={async (values) => {
-          const selectedCardTypes = values.map((value) => value.value);
-          await setSelectedCardTypes(selectedCardTypes);
-        }}
-        placeholder="Select Card Types"
-        emptyIndicator={<p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
-          no results found.
-        </p>}
-        groupBy="group"
-      />
-      <Select onValueChange={setSelectedRarity} value={selectedRarity}>
-        <SelectTrigger className="h-full">
-          <SelectValue placeholder="Select a Rarity" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {cardRarity.map((rarity) => (<SelectItem key={rarity.value} value={rarity.value}>
-              {rarity.label}
-            </SelectItem>))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      <div className={"grid grid-cols-4 gap-x-2 pb-10"}>
+        <MultiSelect
+          options={colors}
+          onValueChange={setSelectedColors}
+          defaultValue={selectedColors}
+          placeholder="Select Colors"
+          variant="default"
+          animation={0}
+          maxCount={3}
+        />
+        <MultipleSelector
+          defaultOptions={cardTypes}
+          onChange={async (values) => {
+            const selectedCardTypes = values.map((value) => value.value);
+            await setSelectedCardTypes(selectedCardTypes);
+          }}
+          placeholder="Select Card Types"
+          emptyIndicator={<p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+            no results found.
+          </p>}
+          groupBy="group"
+        />
+        <MultiSelect
+          options={formatLegalities}
+          onValueChange={setLegalities}
+          defaultValue={legalities}
+          placeholder="Select Legalities"
+          variant="default"
+          animation={0}
+          maxCount={3}
+        />
+        <Select onValueChange={setSelectedRarity} value={selectedRarity}>
+          <SelectTrigger className="h-full">
+            <SelectValue placeholder="Select a Rarity" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {cardRarity.map((rarity) => (<SelectItem key={rarity.value} value={rarity.value}>
+                {rarity.label}
+              </SelectItem>))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+      <div className={"grid grid-cols-3 gap-x-2 gap-y-10"}>
 
-      <DualRangeSlider
-        value={power}
-        min={0}
-        max={10}
-        step={1}
-        label={(value) => value}
-        onValueChange={(value) => setPower(value)}
-        className={"w-full p-y-5"}
-      />
 
-      <DualRangeSlider
-        value={year}
-        min={1993}
-        max={2024}
-        step={1}
-        label={(value) => value}
-        onValueChange={(value) => setYear(value)}
-      />
 
-      <DualRangeSlider
-        value={price}
-        min={0}
-        max={800}
-        step={5}
-        label={(value) => value}
-        onValueChange={(value) => setPrice(value)}
-      />
+        <DualRangeSlider
+          value={power}
+          min={0}
+          max={10}
+          step={1}
+          label={(value) => value}
+          onValueChange={(value) => setPower(value)}
+          className={"w-full p-y-5"}
+        />
 
-      <MultiSelect
-        options={formatLegalities}
-        onValueChange={setLegalities}
-        defaultValue={legalities}
-        placeholder="Select Legalities"
-        variant="default"
-        animation={0}
-        maxCount={3}
-      />
-    </div>
-    <div className="mt-4">
-      <h2 className="text-xl font-semibold">Search Results:</h2>
-      {isLoading && <Spinner />}
-      {isSuccess && <>
+        <DualRangeSlider
+          value={year}
+          min={1993}
+          max={2024}
+          step={1}
+          label={(value) => value}
+          onValueChange={(value) => setYear(value)}
+        />
 
-        {data?.length > 0 ? <div className={"grid grid-cols-6 gap-2"}>
-          {data?.map((card: CardType) =>
-            <CardContextMenu card={card} key={card.id}>
-              <Card card={card} key={card.id} />
-            </CardContextMenu>)}
-        </div> : <p>No results found</p>}
-      </>}
-    </div>
-  </main>);
+        <DualRangeSlider
+          value={price}
+          min={0}
+          max={800}
+          step={5}
+          label={(value) => value}
+          onValueChange={(value) => setPrice(value)}
+        />
+
+
+      </div>
+      <div className="mt-4">
+        {isLoading && <Spinner />}
+        {isSuccess && <>
+          <h2 className="text-3xl font-semibold text-center">Search Results</h2>
+          {data?.length > 0 ? <div className={"grid grid-cols-6 gap-2"}>
+            {data?.map((card: CardType) =>
+              <CardContextMenu card={card} key={card.id}>
+                <Card card={card} key={card.id} />
+              </CardContextMenu>)}
+          </div> : <p>No results found</p>}
+        </>}
+      </div>
+    </Container>
+  );
 }
 

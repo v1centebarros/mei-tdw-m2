@@ -20,9 +20,9 @@ import { Collection } from "@/components/Collection";
 
 export function Navbar() {
   return (
-    <nav className="flex items-center justify-between p-4 bg-background">
+    <nav className="flex items-center justify-between p-4 bg-background border-b-2 border-accent">
       <Link href="/" className="flex-1 text-2xl font-bold ml-4">
-        <Image src={"/logo.png"} alt={"Magic The Gathering"} width={256} height={74} />
+        <Image src={"/logo.png"} alt={"Magic The Gathering"} width={164} height={74} />
       </Link>
       <div className="flex items-center space-x-4">
         <Link href="/builder" className="text-foreground hover:underline underline-offset-2">

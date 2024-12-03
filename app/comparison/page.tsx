@@ -1,62 +1,48 @@
 "use client";
-import { useState } from "react";
-import { ComparisonCard } from "@/components/ComparisonCards";
-import { Card as CardType } from "@/lib/types/card";
-import { Card } from "@/components/Card";
-import { useCardStore } from "@/lib/providers/CardStoreProvider";
 
-export default function Page() {
-  const [selectedCards, setSelectedCards] = useState<CardType[]>([]);
+import { useQuery } from "@tanstack/react-query";
+import { CardSearch } from "@/components/CardSearch";
+import { ComparisonCard } from "@/components/ComparisonCard";
+import { Spinner } from "@/components/ui/spinner";
+import { cardCompareOptions } from "@/lib/hooks/useCards";
+import { parseAsArrayOf, useQueryState } from "nuqs";
+import { parseAsString } from "nuqs/server";
+import Container from "@/components/Container";
 
-  const favoriteCards = useCardStore((state) => state.favoriteCards);
+export default function ComparisonPage() {
+  const [selectedCards, setSelectedCards] = useQueryState("cards", parseAsArrayOf(parseAsString).withDefault(["", ""]));
 
+  const { data: card1, isLoading: isLoading1, error: error1 } = useQuery(cardCompareOptions(selectedCards[0]));
 
-  const handleCardSelect = (card: CardType) => {
-    if (selectedCards.length < 2) {
-      setSelectedCards([...selectedCards, card]);
-    }
+  const { data: card2, isLoading: isLoading2, error: error2 } = useQuery(cardCompareOptions(selectedCards[1]));
+
+  const handleCardSelect = (index: number) => async (cardName: string) => {
+    await setSelectedCards((prev) => {
+      const newCards = [...prev];
+      newCards[index] = cardName;
+      return newCards;
+    });
   };
 
-  const handleReset = () => {
-    setSelectedCards([]);
-  };
+  return (<Container title={"Card Comparison"}>
 
-  return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Magic: The Gathering Card Comparison</h1>
-
-      {selectedCards.length < 2 && (
-        <div className="mb-4">
-          <h2 className="text-xl font-semibold mb-2">Select cards to compare:</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4">
-            {favoriteCards.map((card) => (
-              <button
-                key={card.id}
-                onClick={() => handleCardSelect(card)}
-                className="text-left hover:bg-gray-100 p-2 rounded"
-              >
-                <Card card={card} linkEnabled={false}/>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {selectedCards.length === 2 && (
-        <div>
-          <h2 className="text-xl font-semibold mb-2">Comparison:</h2>
-          <div className="flex flex-col md:flex-row justify-center items-start gap-8">
-            <ComparisonCard card={selectedCards[0]} otherCard={selectedCards[1]} />
-            <ComparisonCard card={selectedCards[1]} otherCard={selectedCards[0]} />
-          </div>
-          <button
-            onClick={handleReset}
-            className="mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Reset Comparison
-          </button>
-        </div>
-      )}
+    <div className="flex flex-col md:flex-row justify-center gap-4 mb-8">
+      <CardSearch onCardSelect={handleCardSelect(0)} placeholder="Search for first card..." />
+      <CardSearch onCardSelect={handleCardSelect(1)} placeholder="Search for second card..." />
     </div>
-  );
+
+    {(isLoading1 || isLoading2) && <Spinner />}
+
+    {(error1 || error2) && (<div className="text-red-500">
+        Error: {((error1 || error2) as Error).message || "An error occurred"}
+      </div>)}
+
+    <div className="flex flex-col md:flex-row justify-center gap-x-64 mb-8">
+      {card1 && <ComparisonCard card={card1} otherCard={card2} />}
+      {card2 && <ComparisonCard card={card2} otherCard={card1} />}
+    </div>
+
+
+  </Container>);
 }
+
