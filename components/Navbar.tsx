@@ -24,16 +24,16 @@ export function Navbar() {
         <Image src={"/logo.png"} alt={"Magic The Gathering"} width={256} height={74} />
       </Link>
       <div className="flex items-center space-x-4">
-        <Link href="/deck-builder" className="text-foreground hover:text-primary">
+        <Link href="/deck-builder" className="text-foreground hover:underline underline-offset-2">
           Deck Builder
         </Link>
-        <Link href="/card-comparison" className="text-foreground hover:text-primary">
+        <Link href="/card-comparison" className="text-foreground hover:underline underline-offset-2">
           Card Comparison
         </Link>
-        <Link href="/search" className="text-foreground hover:text-primary">
+        <Link href="/search" className="text-foreground hover:underline underline-offset-2">
           Advanced Search
         </Link>
-        <Link href="/about" className="text-foreground hover:text-primary">
+        <Link href="/about" className="text-foreground hover:underline underline-offset-2">
           About
         </Link>
         <div className="relative">
