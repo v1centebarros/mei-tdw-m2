@@ -22,10 +22,6 @@ export default function Page() {
   const [year, setYear] = useQueryState("year", parseAsArrayOf(parseAsInteger).withDefault([1993, 2024]));
   const [price, setPrice] = useQueryState("price", parseAsArrayOf(parseAsInteger).withDefault([0, 800]));
   const [legalities, setLegalities] = useQueryState("legalities", parseAsArrayOf(parseAsString).withDefault([]));
-  const [unique, setUnique] = useQueryState("unique", parseAsString.withDefault(""));
-  const [sort, setSort] = useQueryState("sort", parseAsString.withDefault(""));
-  const [prefer, setPrefer] = useQueryState("prefer", parseAsString.withDefault(""));
-
   const query = useMemo(() => {
     const parts = [];
 
