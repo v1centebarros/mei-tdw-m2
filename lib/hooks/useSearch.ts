@@ -40,7 +40,9 @@ const infiniteSearchOptions = (query: string, page: number) =>
     queryKey: ["search", query, page],
     queryFn: ({ pageParam = page }) => fetchInfiniteSearch(query, pageParam),
     initialPageParam: page,
-    getNextPageParam: (page) => page + 1,
+    getNextPageParam: () => {
+      return page + 1;
+    },
     enabled: query.length > 0,
   });
 export { searchOptions, infiniteSearchOptions };
