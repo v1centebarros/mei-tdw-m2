@@ -20,10 +20,10 @@ This project is a Deck Builder application built with TypeScript and React. It a
 ## Project Structure
 
 - `components/`: Contains React components used in the application.
-    - `DeckStats.tsx`: Component to display deck statistics.
-    - `DeckCard.tsx`: Component to display and manage individual cards in the deck.
+  - `DeckStats.tsx`: Component to display deck statistics.
+  - `DeckCard.tsx`: Component to display and manage individual cards in the deck.
 - `.github/workflows/`: Contains GitHub Actions workflows for CI/CD.
-    - `dev-pipeline.yml`: Workflow for installing dependencies, checking Prettier formatting, running lint checks, and TypeScript type checking.
+  - `dev-pipeline.yml`: Workflow for installing dependencies, checking Prettier formatting, running lint checks, and TypeScript type checking.
 
 ## Getting Started
 
@@ -38,3 +38,4 @@ This project is a Deck Builder application built with TypeScript and React. It a
    ```sh
    git clone https://github.com/your-username/deck-builder.git
    cd deck-builder
+   ```
