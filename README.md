@@ -1,6 +1,5 @@
 # Magic The Gathering Management Application
 
-
 Name: [Vicente Barros](https://gitbub.com/vicentebarros)
 
 Course: [Technologies and Web Development](https://www.ua.pt/en/uc/15381)
@@ -8,12 +7,10 @@ Course: [Technologies and Web Development](https://www.ua.pt/en/uc/15381)
 Repository: [GitHub](https://gitbub.com/vicentebarros/mei-tdw-m2)
 Report: [GitHub](https://github.com/v1centebarros/mei-tdw-m2/blob/main/report.md)
 Deployment: [https://mei-tdw-m2.vercel.app/](https://mei-tdw-m2.vercel.app/)
+
 ---
 
-
 This project is a Magic The Gathering (MTG) management system built with TypeScript and React. It allows users to manage and analyze their card collections and decks, providing various statistics and functionalities.
-
-
 
 ## Features
 

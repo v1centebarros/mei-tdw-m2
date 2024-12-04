@@ -6,8 +6,7 @@ Course: [Technologies and Web Development](https://www.ua.pt/en/uc/15381)
 
 Date: 04-12-2024
 
-Deployment: [https://mei-tdw-m2.vercel.app/](https://mei-tdw-m2.vercel.app/)
----
+## Deployment: [https://mei-tdw-m2.vercel.app/](https://mei-tdw-m2.vercel.app/)
 
 ## Overview
 
@@ -19,7 +18,7 @@ After searching for different candidates to be used in this project we decided t
 
 ### API Endpoints
 
-For the development of this project we used the endpoints related to cards namely: 
+For the development of this project we used the endpoints related to cards namely:
 
 - **GET /cards/autocomplete**: Endpoint that returns a list of card names that match the query string passed as a parameter which was used to implement the simple search with autocomplete feature which can be seen in the search bar of the application.
 - **GET /cards/:id**: Endpoint that returns a card by its **id** which was used to get the card details when the user clicks on a card in the search results.
@@ -32,13 +31,13 @@ For the development of this project we used the endpoints related to cards namel
 
 #### API Challenges
 
-Despite being a fully functional API, the MTG API had some challenges that we had to overcome in order to get the desired results. The first challenge was the lack of organisation for the endpoints where the filtering are not easy to use and need some hacking. Pagination is possible, though the definition of a custom limit is not possible. The second challenge was the lack of information in the response of the endpoints which made us to make more requests to get the desired information such as card information on different languages. The official site has some interesting features that the public API is not possible by itself. 
+Despite being a fully functional API, the MTG API had some challenges that we had to overcome in order to get the desired results. The first challenge was the lack of organisation for the endpoints where the filtering are not easy to use and need some hacking. Pagination is possible, though the definition of a custom limit is not possible. The second challenge was the lack of information in the response of the endpoints which made us to make more requests to get the desired information such as card information on different languages. The official site has some interesting features that the public API is not possible by itself.
 
 However, Scryfall provides the full dataset of cards, which could be used to create a custom API that would fit better in our need. Due to lack of implementation time and the complexity of the dataset, we decided to use the MTG API.
 
 ## Technologies
 
-Remembering that the idea of using alternative technologies to the ones we used during classes was to learn new concepts and technologies but more importantly try different strategies to render information and serve it to the user. 
+Remembering that the idea of using alternative technologies to the ones we used during classes was to learn new concepts and technologies but more importantly try different strategies to render information and serve it to the user.
 
 ### Next.js
 
@@ -46,9 +45,9 @@ Remembering that the idea of using alternative technologies to the ones we used 
 
 ### Tailwind CSS and Shadcn/ui
 
-[Tailwind CSS](https://tailwindcss.com) was used in this project to style the components. Tailwind is a utility-first CSS framework that allows the developer to create custom designs without having to write custom CSS. We also used the [Shadcn/ui](https://ui.shadcn.com/) library which is a library that provides a set of components that are already styled with Tailwind CSS. 
+[Tailwind CSS](https://tailwindcss.com) was used in this project to style the components. Tailwind is a utility-first CSS framework that allows the developer to create custom designs without having to write custom CSS. We also used the [Shadcn/ui](https://ui.shadcn.com/) library which is a library that provides a set of components that are already styled with Tailwind CSS.
 A particularity of Shadcn/ui is the components instead of being all bundled in a single file, they are separated in different an the developer can choose which component want to install and then customize the code - this components can be found in `components/ui` folder.
-This library was used to create the layout of the application and also to create some components that were used in the project. 
+This library was used to create the layout of the application and also to create some components that were used in the project.
 
 The main goal of this project was to explore different strategies of rendering and serve the best user experience possible and thus the design was highly simplified.
 
@@ -63,7 +62,6 @@ Once again, we avoided using the Redux Toolkit Query and decided to use [Tanstac
 ### Nuqs
 
 [Nuqs](https://nuqs.vercel.app) is a type-sage search params state management library that allows the developer to create a global state that can be shared throughout the application using the URL. The main use-case of this library on this project was to develop pages that is relevant to share the state between different users - a simple example would be the share of a advanced search query from one user to another.
-
 
 ### Typescript
 
@@ -98,7 +96,7 @@ Collection is, as the name suggest, a way to track the favorite, owned or wanted
 
 ### Advanced Search
 
-The advanced search is to more complete and complex part of the application. As previously stated the API has a custom syntax that needs to be parsed in order to get the correct results. The user workflow is to combine different filters and when the desired result is achieved the page will render the result with an infinite scroll to enhance the user experience. Since sharing the result of the search is relevant, the state is managed using the URL and the Nuqs library. This way the user can share the search result with other users. 
+The advanced search is to more complete and complex part of the application. As previously stated the API has a custom syntax that needs to be parsed in order to get the correct results. The user workflow is to combine different filters and when the desired result is achieved the page will render the result with an infinite scroll to enhance the user experience. Since sharing the result of the search is relevant, the state is managed using the URL and the Nuqs library. This way the user can share the search result with other users.
 
 This page has a particular feature which is the Server-Side-Rendering (SSR) with Hydration on the client-side which means, the first API fetch is made on the server side and rendered fully on the client side and then when the user scrolls the page the new cards are fetched on the client side. This approach was used to enhance the user experience and avoid the user to wait for the full page to be rendered and helping on the SEO.
 
@@ -112,8 +110,7 @@ This page is Server-Side-Rendering (SSR) without Hydration on the client-side si
 
 The landing page is the first page that the user sees when accessing the application. The landing page has a simple design which used Static Site Generation (SSG) to render the page due to the lack of dynamic content.
 
-
-## CI/CD 
+## CI/CD
 
 The development of this project was simplified due to the limited time. The first attempt of deployment was using GitHub Pages which was later discard in favor of Vercel. The deployment was done using the Vercel platform with a production deployment of the main git branch and a preview deployment of the dev branch. When commiting to dev a GitHub action is run to analyse the code on formating using Prettier, linting using ESLint and type-checking using Typescript. The code is only merged to the main branch if the action is successful.
 

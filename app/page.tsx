@@ -1,21 +1,25 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
-import { LucideDiff, LucideFolder, LucideLayers, LucideSearch, LucideSettings } from "lucide-react";
+import {
+  LucideDiff,
+  LucideFolder,
+  LucideLayers,
+  LucideSearch,
+  LucideSettings,
+} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Home() {
-
   return (
     <main className="container mx-auto bg-[hsl(var(--background))] p-8 text-[hsl(var(--foreground))]">
-      <section
-        className="mb-12 rounded-lg bg-[hsl(var(--primary))] py-16 text-center text-[hsl(var(--primary-foreground))]">
+      <section className="mb-12 rounded-lg bg-[hsl(var(--primary))] py-16 text-center text-[hsl(var(--primary-foreground))]">
         <h1 className="mb-4 text-4xl font-bold">
           Magic: The Gathering Deck Manager
         </h1>
         <p className="mb-6 text-lg">
-          Discover, compare, and manage your favorite Magic: The Gathering
-          cards effortlessly.
+          Discover, compare, and manage your favorite Magic: The Gathering cards
+          effortlessly.
         </p>
         <Link
           href="/search"
@@ -50,9 +54,7 @@ export default function Home() {
             size={48}
             className="mx-auto mb-4 text-[hsl(var(--primary))]"
           />
-          <h2 className="mb-2 text-xl font-semibold">
-            Collection Management
-          </h2>
+          <h2 className="mb-2 text-xl font-semibold">Collection Management</h2>
           <p>
             Organize your favorite cards, owned cards, and wishlist in a
             personalized collection.
@@ -66,8 +68,8 @@ export default function Home() {
           />
           <h2 className="mb-2 text-xl font-semibold">Card Comparison</h2>
           <p>
-            Compare two cards side by side to analyze their stats, effects,
-            and prices.
+            Compare two cards side by side to analyze their stats, effects, and
+            prices.
           </p>
         </Card>
 
@@ -102,8 +104,8 @@ export default function Home() {
           />
           <h2 className="mb-2 text-xl font-semibold">Seamless Navigation</h2>
           <p>
-            Enjoy fluid navigation between pages with accessible links for
-            each feature.
+            Enjoy fluid navigation between pages with accessible links for each
+            feature.
           </p>
         </Card>
       </section>
@@ -119,8 +121,8 @@ export default function Home() {
           >
             Scryfall API
           </a>{" "}
-          to provide comprehensive card data, advanced searches, and
-          up-to-date prices.
+          to provide comprehensive card data, advanced searches, and up-to-date
+          prices.
         </p>
         <Link
           href="https://scryfall.com/docs/api"
@@ -132,9 +134,7 @@ export default function Home() {
       </section>
 
       <section className="text-center">
-        <h2 className="mb-4 text-2xl font-bold">
-          Your Gateway to MTG Mastery
-        </h2>
+        <h2 className="mb-4 text-2xl font-bold">Your Gateway to MTG Mastery</h2>
         <p className="mb-8">
           Start building your collection and decks today with the ultimate MTG
           deck manager.
