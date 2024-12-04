@@ -23,7 +23,7 @@ export default async function Page({ searchParams }: Readonly<PageProps>) {
     year,
     price,
     legalities,
-    page
+    page,
   } = await advancedSearchParamsCache.parse(searchParams);
 
   const queryClient = getQueryClient();
@@ -37,15 +37,22 @@ export default async function Page({ searchParams }: Readonly<PageProps>) {
         power,
         year,
         price,
-        legalities
+        legalities,
       }),
-      page
-    )
+      page,
+    ),
   );
 
-  return (<Container title={"Advanced Search"}>
+  return (
+    <Container title={"Advanced Search"}>
       <SearchFilters />
-      <Suspense fallback={<div className={"mx-auto"}><Spinner /></div>}>
+      <Suspense
+        fallback={
+          <div className={"mx-auto"}>
+            <Spinner />
+          </div>
+        }
+      >
         <HydrationBoundary state={dehydrate(queryClient)}>
           <AdvancedSearch />
         </HydrationBoundary>

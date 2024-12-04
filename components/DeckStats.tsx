@@ -1,4 +1,4 @@
-import { Card } from '@/lib/types/card';
+import { Card } from "@/lib/types/card";
 
 interface DeckStatsProps {
   deck: { [cardId: string]: { card: Card; quantity: number } };
@@ -10,7 +10,8 @@ export function DeckStats({ deck }: DeckStatsProps) {
   const uniqueCards = cards.length;
 
   const averageCMC =
-    cards.reduce((sum, { card, quantity }) => sum + card.cmc * quantity, 0) / totalCards;
+    cards.reduce((sum, { card, quantity }) => sum + card.cmc * quantity, 0) /
+    totalCards;
 
   const colorCounts = cards.reduce(
     (counts, { card, quantity }) => {
@@ -19,23 +20,23 @@ export function DeckStats({ deck }: DeckStatsProps) {
       });
       return counts;
     },
-    {} as { [color: string]: number }
+    {} as { [color: string]: number },
   );
 
   const typeCounts = cards.reduce(
     (counts, { card, quantity }) => {
-      const types = card.type_line.split(' ');
+      const types = card.type_line.split(" ");
       types.forEach((type) => {
         counts[type] = (counts[type] || 0) + quantity;
       });
       return counts;
     },
-    {} as { [type: string]: number }
+    {} as { [type: string]: number },
   );
 
   return (
-    <div className="border p-4 rounded-lg">
-      <h2 className="text-xl font-bold mb-4">Deck Statistics</h2>
+    <div className="rounded-lg border p-4">
+      <h2 className="mb-4 text-xl font-bold">Deck Statistics</h2>
       <div className="grid grid-cols-2 gap-4">
         <div>
           <h3 className="font-semibold">Total Cards:</h3>
@@ -63,16 +64,15 @@ export function DeckStats({ deck }: DeckStatsProps) {
           <h3 className="font-semibold">Type Distribution:</h3>
           <ul>
             {Object.entries(typeCounts)
-              .filter(([type]) => !['—', '//'].includes(type))
+              .filter(([type]) => !["—", "//"].includes(type))
               .map(([type, count]) => (
-              <li key={type}>
-                {type}: {count}
-              </li>
-            ))}
+                <li key={type}>
+                  {type}: {count}
+                </li>
+              ))}
           </ul>
         </div>
       </div>
     </div>
   );
 }
-

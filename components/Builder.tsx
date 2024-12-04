@@ -12,7 +12,9 @@ import Container from "@/components/Container";
 
 export default function DeckBuilderPage() {
   const [selectedCard, setSelectedCard] = useState<string>("");
-  const [deck, setDeck] = useState<{ [cardId: string]: { card: Card; quantity: number } }>({});
+  const [deck, setDeck] = useState<{
+    [cardId: string]: { card: Card; quantity: number };
+  }>({});
 
   const { data: card, isLoading } = useQuery(cardCompareOptions(selectedCard));
 
@@ -50,13 +52,16 @@ export default function DeckBuilderPage() {
 
   return (
     <Container title={"Deck Builder"}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div>
-          <CardSearch onCardSelect={handleCardSelect} placeholder="Search for a card..." />
+          <CardSearch
+            onCardSelect={handleCardSelect}
+            placeholder="Search for a card..."
+          />
           {isLoading && <Spinner />}
           {card && (
             <div className="mt-4">
-              <h2 className="text-xl font-semibold mb-2">Selected Card</h2>
+              <h2 className="mb-2 text-xl font-semibold">Selected Card</h2>
               <DeckCard
                 card={card}
                 quantity={deck[card.id]?.quantity || 0}
@@ -66,13 +71,11 @@ export default function DeckBuilderPage() {
             </div>
           )}
         </div>
-        <div>
-          {Object.keys(deck).length > 0 && <DeckStats deck={deck} />}
-        </div>
+        <div>{Object.keys(deck).length > 0 && <DeckStats deck={deck} />}</div>
       </div>
       <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Your Deck</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <h2 className="mb-4 text-2xl font-semibold">Your Deck</h2>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {Object.values(deck).map(({ card, quantity }) => (
             <DeckCard
               key={card.id}

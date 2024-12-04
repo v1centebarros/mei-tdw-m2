@@ -11,7 +11,10 @@ interface CardSearchProps {
   placeholder: string;
 }
 
-export function CardSearch({ onCardSelect, placeholder }: Readonly<CardSearchProps>) {
+export function CardSearch({
+  onCardSelect,
+  placeholder,
+}: Readonly<CardSearchProps>) {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showResults, setShowResults] = useState(false);

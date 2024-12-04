@@ -10,7 +10,12 @@ interface DeckCardProps {
   onRemove: () => void;
 }
 
-export function DeckCard({ card, quantity, onAdd, onRemove }: Readonly<DeckCardProps>) {
+export function DeckCard({
+  card,
+  quantity,
+  onAdd,
+  onRemove,
+}: Readonly<DeckCardProps>) {
   return (
     <div className="flex flex-col rounded-lg p-2">
       <Image
@@ -23,7 +28,7 @@ export function DeckCard({ card, quantity, onAdd, onRemove }: Readonly<DeckCardP
 
       <h3 className="mb-1 text-sm font-semibold">{card.name}</h3>
       <p className="mb-2 text-xs">{card.type_line}</p>
-      <div className="flex w-full gap-x-3 items-center">
+      <div className="flex w-full items-center gap-x-3">
         <Button
           onClick={onRemove}
           className="rounded px-2 py-1 text-xs text-white"
