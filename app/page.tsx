@@ -1,5 +1,5 @@
 import { getQueryClient } from "@/lib/getQueryClient";
-import { cardOptions } from "@/lib/hooks/useCards";
+import { cardOptions } from "@/hooks/useCards";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import React from "react";
 import { Card } from "@/components/ui/card";

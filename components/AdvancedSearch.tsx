@@ -3,7 +3,7 @@ import { parseAsArrayOf, parseAsInteger, useQueryState } from "nuqs";
 import { parseAsString } from "nuqs/server";
 import React, { Fragment, useEffect, useMemo, useState } from "react";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
-import { infiniteSearchOptions } from "@/lib/hooks/useSearch";
+import { infiniteSearchOptions } from "@/hooks/useSearch";
 import { useInView } from "react-intersection-observer";
 import { Spinner } from "@/components/ui/spinner";
 import { Card as CardType } from "@/lib/types/card";

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { autoCompleteOptions } from "@/lib/hooks/useCards";
+import { autoCompleteOptions } from "@/hooks/useCards";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Spinner } from "@/components/ui/spinner";

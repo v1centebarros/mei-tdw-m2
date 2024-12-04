@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/context-menu";
 import { Card } from "@/lib/types/card";
 import { Euro, Heart, Package } from "lucide-react";
-import { useCardActions } from "@/lib/hooks/useCardActions";
+import { useCardActions } from "@/hooks/useCardActions";
 
 export default function CardContextMenu({
   card,

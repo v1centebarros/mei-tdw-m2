@@ -1,6 +1,6 @@
 import { type SearchParams } from "nuqs/server";
 import { searchParamsCache } from "@/lib/searchParams";
-import { fetchCard } from "@/lib/hooks/useCards";
+import { fetchCard } from "@/hooks/useCards";
 import {
   Card,
   CardContent,
@@ -13,7 +13,7 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import React, { Suspense } from "react";
-import { fetchSymbols } from "@/lib/hooks/useSymbols";
+import { fetchSymbols } from "@/hooks/useSymbols";
 import { CardSymbol } from "@/lib/types/symbol";
 import Link from "next/link";
 import { CardToggle } from "@/components/CardToggle";

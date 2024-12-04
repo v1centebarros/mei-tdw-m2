@@ -1,7 +1,7 @@
 import AdvancedSearch from "@/components/AdvancedSearch";
 import React, { Suspense } from "react";
 import { getQueryClient } from "@/lib/getQueryClient";
-import { infiniteSearchOptions } from "@/lib/hooks/useSearch";
+import { infiniteSearchOptions } from "@/hooks/useSearch";
 import { type SearchParams } from "nuqs/server";
 import { advancedSearchParamsCache } from "@/lib/searchParams";
 import { buildQueryParts } from "@/lib/utils";

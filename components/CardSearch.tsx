@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
-import { autoCompleteOptions } from "@/lib/hooks/useCards";
+import { autoCompleteOptions } from "@/hooks/useCards";
 
 interface CardSearchProps {
   onCardSelect: (cardName: string) => void;

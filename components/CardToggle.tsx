@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useCardActions } from "@/lib/hooks/useCardActions";
+import { useCardActions } from "@/hooks/useCardActions";
 import { Card } from "@/lib/types/card";
 import { Heart, Package, ScrollText } from "lucide-react";
 

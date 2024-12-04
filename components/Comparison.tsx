@@ -2,7 +2,7 @@
 import { parseAsArrayOf, useQueryState } from "nuqs";
 import { parseAsString } from "nuqs/server";
 import { useQuery } from "@tanstack/react-query";
-import { cardCompareOptions } from "@/lib/hooks/useCards";
+import { cardCompareOptions } from "@/hooks/useCards";
 import Container from "@/components/Container";
 import { CardSearch } from "@/components/CardSearch";
 import { Spinner } from "@/components/ui/spinner";
