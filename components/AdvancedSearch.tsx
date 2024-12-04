@@ -1,9 +1,10 @@
 "use client";
 import { parseAsArrayOf, parseAsInteger, useQueryState } from "nuqs";
 import { parseAsString } from "nuqs/server";
-import { Suspense, useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { searchOptions } from "@/lib/hooks/useSearch";
+import React, { Fragment, Suspense, useEffect, useMemo } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { infiniteSearchOptions } from "@/lib/hooks/useSearch";
+import { useInView } from "react-intersection-observer";
 import Container from "@/components/Container";
 import { MultiSelect } from "@/components/ui/multi-select";
 import { cardRarity, cardTypes, colors, formatLegalities } from "@/lib/primitives";
@@ -24,6 +25,7 @@ export default function AdvancedSearch() {
   const [year, setYear] = useQueryState("year", parseAsArrayOf(parseAsInteger).withDefault([1993, 2024]));
   const [price, setPrice] = useQueryState("price", parseAsArrayOf(parseAsInteger).withDefault([0, 800]));
   const [legalities, setLegalities] = useQueryState("legalities", parseAsArrayOf(parseAsString).withDefault([]));
+  const [page] = useQueryState("page", parseAsInteger.withDefault(1));
   const query = useMemo(() => {
     const parts = [];
 
@@ -51,8 +53,15 @@ export default function AdvancedSearch() {
     return parts.join("+");
   }, [selectedColors, selectedCardTypes, selectedRarity, power, year, price, legalities]);
 
-
-  const { data, isLoading, isSuccess } = useQuery(searchOptions(query));
+  const {
+    data, isFetching, isFetchingNextPage, isLoading, isSuccess, fetchNextPage, hasNextPage
+  } = useInfiniteQuery(infiniteSearchOptions(query, page));
+  const { ref, inView } = useInView();
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage]);
 
   return (<Container title={"Advanced Search"}>
       <Suspense>
@@ -138,15 +147,29 @@ export default function AdvancedSearch() {
           {isLoading && <Spinner />}
           {isSuccess && <>
             <h2 className="text-3xl font-semibold text-center">Search Results</h2>
-            {data?.length > 0 ? <div className={"grid grid-cols-6 gap-2"}>
-              {data?.map((card: CardType) =>
-                <CardContextMenu card={card} key={card.id}>
-                  <Card card={card} key={card.id} />
-                </CardContextMenu>)}
+            {data.pages.length > 0 ? <div className={"grid grid-cols-6 gap-2"}>
+              {data.pages.map((page) => (<Fragment key={page.nextId}>
+                  {page.map((card: CardType) => <CardContextMenu card={card} key={card.id}>
+                    <Card card={card} key={card.id} />
+                  </CardContextMenu>)}
+                </Fragment>))}
             </div> : <p>No results found</p>}
+            <div className="flex justify-center">
+              <button
+                ref={ref}
+                className={"mx-auto"}
+                onClick={() => fetchNextPage()}
+                disabled={!hasNextPage || isFetchingNextPage}
+              >
+                {isFetchingNextPage ? <Spinner /> : !hasNextPage && "Nothing more to load"}
+              </button>
+
+            </div>
+            <div>
+              {isFetching && !isFetchingNextPage ? "Background Updating..." : null}
+            </div>
           </>}
         </div>
       </Suspense>
-    </Container>
-  );
+    </Container>);
 }
