@@ -1,101 +1,177 @@
+import { getQueryClient } from "@/lib/getQueryClient";
+import { cardOptions } from "@/hooks/useCards";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import React from "react";
+import { Card } from "@/components/ui/card";
+import {
+  LucideDiff,
+  LucideFolder,
+  LucideLayers,
+  LucideSearch,
+  LucideSettings,
+} from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const queryClient = getQueryClient();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  void queryClient.prefetchQuery(cardOptions(1));
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <main className="container mx-auto bg-[hsl(var(--background))] p-8 text-[hsl(var(--foreground))]">
+        <section className="mb-12 rounded-lg bg-[hsl(var(--primary))] py-16 text-center text-[hsl(var(--primary-foreground))]">
+          <h1 className="mb-4 text-4xl font-bold">
+            Magic: The Gathering Deck Manager
+          </h1>
+          <p className="mb-6 text-lg">
+            Discover, compare, and manage your favorite Magic: The Gathering
+            cards effortlessly.
+          </p>
+          <Link
+            href="/search"
+            className="rounded bg-[hsl(var(--secondary))] px-6 py-3 font-semibold text-[hsl(var(--secondary-foreground))] hover:bg-[hsl(var(--secondary-foreground))] hover:text-[hsl(var(--secondary))]"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+            Get Started
+          </Link>
+        </section>
+
+        <section className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <Card className="bg-[hsl(var(--card))] p-6 text-center text-[hsl(var(--card-foreground))]">
+            <LucideSearch
+              size={48}
+              className="mx-auto mb-4 text-[hsl(var(--primary))]"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <h2 className="mb-2 text-xl font-semibold">Advanced Search</h2>
+            <p>
+              Utilize the{" "}
+              <a
+                href="https://scryfall.com/docs/syntax"
+                target="_blank"
+                className="text-[hsl(var(--primary))] underline"
+              >
+                Scryfall API syntax
+              </a>{" "}
+              for detailed card searches with filters.
+            </p>
+          </Card>
+
+          <Card className="bg-[hsl(var(--card))] p-6 text-center text-[hsl(var(--card-foreground))]">
+            <LucideFolder
+              size={48}
+              className="mx-auto mb-4 text-[hsl(var(--primary))]"
+            />
+            <h2 className="mb-2 text-xl font-semibold">
+              Collection Management
+            </h2>
+            <p>
+              Organize your favorite cards, owned cards, and wishlist in a
+              personalized collection.
+            </p>
+          </Card>
+
+          <Card className="bg-[hsl(var(--card))] p-6 text-center text-[hsl(var(--card-foreground))]">
+            <LucideDiff
+              size={48}
+              className="mx-auto mb-4 text-[hsl(var(--primary))]"
+            />
+            <h2 className="mb-2 text-xl font-semibold">Card Comparison</h2>
+            <p>
+              Compare two cards side by side to analyze their stats, effects,
+              and prices.
+            </p>
+          </Card>
+
+          <Card className="bg-[hsl(var(--card))] p-6 text-center text-[hsl(var(--card-foreground))]">
+            <LucideSettings
+              size={48}
+              className="mx-auto mb-4 text-[hsl(var(--primary))]"
+            />
+            <h2 className="mb-2 text-xl font-semibold">Custom Settings</h2>
+            <p>
+              Adjust settings like preferred currency (USD, EUR, or TIX) for a
+              personalized experience.
+            </p>
+          </Card>
+
+          <Card className="bg-[hsl(var(--card))] p-6 text-center text-[hsl(var(--card-foreground))]">
+            <LucideLayers
+              size={48}
+              className="mx-auto mb-4 text-[hsl(var(--primary))]"
+            />
+            <h2 className="mb-2 text-xl font-semibold">Deck Builder</h2>
+            <p>
+              Create, customize, and save your decks to prepare for your next
+              match.
+            </p>
+          </Card>
+
+          <Card className="bg-[hsl(var(--card))] p-6 text-center text-[hsl(var(--card-foreground))]">
+            <LucideSearch
+              size={48}
+              className="mx-auto mb-4 text-[hsl(var(--primary))]"
+            />
+            <h2 className="mb-2 text-xl font-semibold">Seamless Navigation</h2>
+            <p>
+              Enjoy fluid navigation between pages with accessible links for
+              each feature.
+            </p>
+          </Card>
+        </section>
+
+        <section className="mb-16 text-center">
+          <h2 className="mb-4 text-2xl font-bold">Powered by Scryfall API</h2>
+          <p className="mb-6">
+            This project integrates with the{" "}
+            <a
+              href="https://scryfall.com"
+              target="_blank"
+              className="text-[hsl(var(--primary))] underline"
+            >
+              Scryfall API
+            </a>{" "}
+            to provide comprehensive card data, advanced searches, and
+            up-to-date prices.
+          </p>
+          <Link
+            href="https://scryfall.com/docs/api"
+            target={"_blank"}
+            className="rounded bg-[hsl(var(--primary))] px-6 py-3 text-[hsl(var(--primary-foreground))] hover:bg-[hsl(var(--secondary))]"
           >
-            Read our docs
-          </a>
-        </div>
+            Learn More
+          </Link>
+        </section>
+
+        <section className="text-center">
+          <h2 className="mb-4 text-2xl font-bold">
+            Your Gateway to MTG Mastery
+          </h2>
+          <p className="mb-8">
+            Start building your collection and decks today with the ultimate MTG
+            deck manager.
+          </p>
+          <Image
+            src="/banner.webp"
+            alt="Banner"
+            className="mb-6 h-auto w-full rounded-lg"
+            width={2000}
+            height={1087}
+          />
+        </section>
+
+        <footer className="py-4 text-center text-[hsl(var(--muted-foreground))]">
+          Made with ❤️ by{" "}
+          <Link
+            className={"underline-offset-2 hover:underline"}
+            href={"https://github.com/v1centebarros"}
+            target={"_blank"}
+          >
+            v1centebarros
+          </Link>{" "}
+          for TDW 2024
+        </footer>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    </HydrationBoundary>
   );
 }
