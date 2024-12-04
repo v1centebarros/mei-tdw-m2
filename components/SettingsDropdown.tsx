@@ -5,7 +5,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-  DropdownMenuSeparator,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
@@ -13,30 +12,30 @@ import {
 import { useSettingsStore } from "@/lib/stores/settingsStore";
 
 export default function SettingsDropdown() {
-  const { language, currency, setLanguage,setCurrency } = useSettingsStore();
+  const {  currency, setCurrency } = useSettingsStore();
 
   return (
     <DropdownMenuContent align="end">
       <DropdownMenuLabel>Settings</DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuSub>
-        <DropdownMenuSubTrigger>
-          <span>Language</span>
-        </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent>
-          <DropdownMenuRadioGroup
-            value={language}
-            onValueChange={(value) => setLanguage(value)}
-          >
-            <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="es">Español</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="fr">Français</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="de">Deutsch</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="it">Italiano</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="pt">Português</DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
-        </DropdownMenuSubContent>
-      </DropdownMenuSub>
+      {/*<DropdownMenuSeparator />*/}
+      {/*<DropdownMenuSub>*/}
+      {/*  <DropdownMenuSubTrigger>*/}
+      {/*    <span>Language</span>*/}
+      {/*  </DropdownMenuSubTrigger>*/}
+      {/*  <DropdownMenuSubContent>*/}
+      {/*    <DropdownMenuRadioGroup*/}
+      {/*      value={language}*/}
+      {/*      onValueChange={(value) => setLanguage(value)}*/}
+      {/*    >*/}
+      {/*      <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>*/}
+      {/*      <DropdownMenuRadioItem value="es">Español</DropdownMenuRadioItem>*/}
+      {/*      <DropdownMenuRadioItem value="fr">Français</DropdownMenuRadioItem>*/}
+      {/*      <DropdownMenuRadioItem value="de">Deutsch</DropdownMenuRadioItem>*/}
+      {/*      <DropdownMenuRadioItem value="it">Italiano</DropdownMenuRadioItem>*/}
+      {/*      <DropdownMenuRadioItem value="pt">Português</DropdownMenuRadioItem>*/}
+      {/*    </DropdownMenuRadioGroup>*/}
+      {/*  </DropdownMenuSubContent>*/}
+      {/*</DropdownMenuSub>*/}
       <DropdownMenuSub>
         <DropdownMenuSubTrigger>
           <span>Currency</span>
