@@ -7,6 +7,8 @@ import { advancedSearchParamsCache } from "@/lib/searchParams";
 import { buildQueryParts } from "@/lib/utils";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Spinner } from "@/components/ui/spinner";
+import SearchFilters from "@/components/searchFilters";
+import Container from "@/components/Container";
 
 type PageProps = {
   searchParams: Promise<SearchParams>;
@@ -21,7 +23,7 @@ export default async function Page({ searchParams }: Readonly<PageProps>) {
     year,
     price,
     legalities,
-    page,
+    page
   } = await advancedSearchParamsCache.parse(searchParams);
 
   const queryClient = getQueryClient();
@@ -35,17 +37,19 @@ export default async function Page({ searchParams }: Readonly<PageProps>) {
         power,
         year,
         price,
-        legalities,
+        legalities
       }),
-      page,
-    ),
+      page
+    )
   );
 
-  return (
-    <Suspense fallback={<div className={"mx-auto"}><Spinner/></div>}>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <AdvancedSearch />
-      </HydrationBoundary>
-    </Suspense>
+  return (<Container title={"Advanced Search"}>
+      <SearchFilters />
+      <Suspense fallback={<div className={"mx-auto"}><Spinner /></div>}>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <AdvancedSearch />
+        </HydrationBoundary>
+      </Suspense>
+    </Container>
   );
 }
