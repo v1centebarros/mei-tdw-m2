@@ -81,6 +81,7 @@ Following the good practices of code organization, the project was divided into 
 ### Simple Search with Autocomplete
 
 The simple search with autocomplete feature allows the user to search for a card by typing the name of the card in the search bar. The search bar has an autocomplete feature that suggests card names that match the query string typed by the user. The user can click or navigate through the suggestions using the arrow keys and select the card by pressing the enter key resulting in the display of the card details.
+![autocomplete.png](reportimages/autocomplete.png)
 
 ### Deck Builder
 
@@ -89,26 +90,30 @@ The deck builder feature is the simplest implementation in terms of rendering to
 ### Card Comparison
 
 The card comparison feature allows the user to compare two cards side by side. The user can select two cards by clicking on the cards in a similar autocomplete search bar and the cards will be displayed side by side in the card comparison page. For this page the state management is done using the URL and the Nuqs library. This approach allows the user to share the comparison between different users. However, the state is lost when the user navigates to another page.
+![cardcomparison.png](reportimages/cardcomparison.png)
 
 ### Collection
 
 Collection is, as the name suggest, a way to track the favorite, owned or wanted cards. A card can be added to the collection by clicking on the card with the right mouse button and selecting the option to add to the collection. The collection component displays the cards that are in the collection and allows the user to remove the cards from the collection. Since the collection need to be accessible throughout the application, the state is managed using the Zustand library which store not only global states but also the states that are persisted in the local storage. This way the user can manage all their collection in different pages.
+![collection.png](reportimages/collection.png)
 
 ### Advanced Search
 
 The advanced search is to more complete and complex part of the application. As previously stated the API has a custom syntax that needs to be parsed in order to get the correct results. The user workflow is to combine different filters and when the desired result is achieved the page will render the result with an infinite scroll to enhance the user experience. Since sharing the result of the search is relevant, the state is managed using the URL and the Nuqs library. This way the user can share the search result with other users.
 
 This page has a particular feature which is the Server-Side-Rendering (SSR) with Hydration on the client-side which means, the first API fetch is made on the server side and rendered fully on the client side and then when the user scrolls the page the new cards are fetched on the client side. This approach was used to enhance the user experience and avoid the user to wait for the full page to be rendered and helping on the SEO.
+![advancedsearch.png](reportimages/advancedsearch.png)
 
 ### Card Details
 
 Cards details is the page that displays the details of a card. The user can access this page by clicking on a card in the search results or by clicking on a card in the collection. The card details page displays some information about the card where some of them are clickable and will redirect the user to the advanced search page with the filter already applied helping the site navigation. In this page is possible to see the parser of the text being done on the Mana Cost and the Card Text.
-
 This page is Server-Side-Rendering (SSR) without Hydration on the client-side since the card details will not change after the first render. The only exception is the currency conversion that is done on the client side depending on the user preference. It was also thought to do language conversion but the API does not provide the information in the response.
+![carddetails.png](reportimages/carddetails.png)
 
 ### Landing Page
 
 The landing page is the first page that the user sees when accessing the application. The landing page has a simple design which used Static Site Generation (SSG) to render the page due to the lack of dynamic content.
+![fontpage.png](reportimages/fontpage.png)
 
 ## CI/CD
 
