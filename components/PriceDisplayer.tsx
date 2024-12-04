@@ -8,7 +8,9 @@ interface PriceDisplayerProps {
   prices: Prices;
 }
 
-export default function PriceDisplayer({ prices }: Readonly<PriceDisplayerProps>) {
+export default function PriceDisplayer({
+  prices,
+}: Readonly<PriceDisplayerProps>) {
   const { currency } = useSettingsStore();
 
   const getPriceDisplay = () => {

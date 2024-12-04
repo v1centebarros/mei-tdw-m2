@@ -5,11 +5,13 @@ interface ContainerProps {
   title: string;
 }
 
-export default function Container({ children, title }: Readonly<ContainerProps>) {
-
+export default function Container({
+  children,
+  title,
+}: Readonly<ContainerProps>) {
   return (
     <main className="container mx-auto p-4">
-      <h1 className="text-4xl text-center font-extrabold mb-4">{title}</h1>
+      <h1 className="mb-4 text-center text-4xl font-extrabold">{title}</h1>
       {children}
     </main>
   );

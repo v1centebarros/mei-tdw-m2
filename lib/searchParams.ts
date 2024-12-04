@@ -1,4 +1,9 @@
-import { createSearchParamsCache, parseAsString, parseAsArrayOf, parseAsInteger } from "nuqs/server";
+import {
+  createSearchParamsCache,
+  parseAsString,
+  parseAsArrayOf,
+  parseAsInteger,
+} from "nuqs/server";
 
 export const searchParamsCache = createSearchParamsCache({
   name: parseAsString.withDefault(""),
@@ -15,6 +20,3 @@ export const advancedSearchParamsCache = createSearchParamsCache({
   legalities: parseAsArrayOf(parseAsString).withDefault([]),
   page: parseAsInteger.withDefault(1),
 });
-
-
-

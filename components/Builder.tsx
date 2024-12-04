@@ -146,7 +146,5 @@ export default function Builder() {
   //       </div>
   //     </div>
   //   </Container>
-  return (
-    <p>Hello</p>
-  );
+  return <p>Hello</p>;
 }

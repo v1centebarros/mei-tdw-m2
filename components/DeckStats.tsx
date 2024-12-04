@@ -1,16 +1,17 @@
-import { Card } from '@/lib/types/card';
+import { Card } from "@/lib/types/card";
 
 interface DeckStatsProps {
   deck: { [cardId: string]: { card: Card; quantity: number } };
 }
 
-export function DeckStats({ deck }: DeckStatsProps) {
+export function DeckStats({ deck }: Readonly<DeckStatsProps>) {
   const cards = Object.values(deck);
   const totalCards = cards.reduce((sum, { quantity }) => sum + quantity, 0);
   const uniqueCards = cards.length;
 
   const averageCMC =
-    cards.reduce((sum, { card, quantity }) => sum + card.cmc * quantity, 0) / totalCards;
+    cards.reduce((sum, { card, quantity }) => sum + card.cmc * quantity, 0) /
+    totalCards;
 
   const colorCounts = cards.reduce(
     (counts, { card, quantity }) => {
@@ -19,23 +20,23 @@ export function DeckStats({ deck }: DeckStatsProps) {
       });
       return counts;
     },
-    {} as { [color: string]: number }
+    {} as { [color: string]: number },
   );
 
   const typeCounts = cards.reduce(
     (counts, { card, quantity }) => {
-      const types = card.type_line.split(' ');
+      const types = card.type_line.split(" ");
       types.forEach((type) => {
         counts[type] = (counts[type] || 0) + quantity;
       });
       return counts;
     },
-    {} as { [type: string]: number }
+    {} as { [type: string]: number },
   );
 
   return (
-    <div className="bg-gray-100 p-4 rounded-lg">
-      <h2 className="text-xl font-bold mb-4">Deck Statistics</h2>
+    <div className="rounded-lg bg-gray-100 p-4">
+      <h2 className="mb-4 text-xl font-bold">Deck Statistics</h2>
       <div className="grid grid-cols-2 gap-4">
         <div>
           <h3 className="font-semibold">Total Cards:</h3>
@@ -73,4 +74,3 @@ export function DeckStats({ deck }: DeckStatsProps) {
     </div>
   );
 }
-

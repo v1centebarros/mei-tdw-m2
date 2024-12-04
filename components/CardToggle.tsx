@@ -7,12 +7,16 @@ import { Heart, Package, ScrollText } from "lucide-react";
 
 interface CardToggleProps {
   card: Card;
-
 }
 
 export function CardToggle({ card }: Readonly<CardToggleProps>) {
   const {
-    isFavorite, isWantToBuy, isOwned, handleFavoriteClick, handleWantToBuyClick, handleOwnedClick
+    isFavorite,
+    isWantToBuy,
+    isOwned,
+    handleFavoriteClick,
+    handleWantToBuyClick,
+    handleOwnedClick,
   } = useCardActions(card);
 
   return (

@@ -1,10 +1,10 @@
-import Link from 'next/link'
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Settings } from 'lucide-react'
+} from "@/components/ui/dropdown-menu";
+import { Settings } from "lucide-react";
 import { SearchBar } from "@/components/SearchBar";
 import Image from "next/image";
 import { ModeToggle } from "@/components/ModeToggle";
@@ -12,19 +12,33 @@ import { Collection } from "@/components/Collection";
 import SettingsDropdown from "@/components/SettingsDropdown";
 export function Navbar() {
   return (
-    <nav className="flex items-center justify-between p-4 bg-background border-b-2 border-accent">
-      <Link href="/" className="flex-1 text-2xl font-bold ml-4">
-        <Image src={"/logo.png"} alt={"Magic The Gathering"} width={164} height={74} />
+    <nav className="flex items-center justify-between border-b-2 border-accent bg-background p-4">
+      <Link href="/" className="ml-4 flex-1 text-2xl font-bold">
+        <Image
+          src={"/logo.png"}
+          alt={"Magic The Gathering"}
+          width={164}
+          height={74}
+        />
       </Link>
       <div className="flex items-center space-x-4">
-        <Link href="/builder" className="text-foreground hover:underline underline-offset-2">
+        <Link
+          href="/builder"
+          className="text-foreground underline-offset-2 hover:underline"
+        >
           Deck Builder
         </Link>
-        <Link href="/comparison" className="text-foreground hover:underline underline-offset-2">
+        <Link
+          href="/comparison"
+          className="text-foreground underline-offset-2 hover:underline"
+        >
           Card Comparison
         </Link>
         <Collection />
-        <Link href="/search" className="text-foreground hover:underline underline-offset-2">
+        <Link
+          href="/search"
+          className="text-foreground underline-offset-2 hover:underline"
+        >
           Advanced Search
         </Link>
 
@@ -45,6 +59,5 @@ export function Navbar() {
         <ModeToggle />
       </div>
     </nav>
-  )
+  );
 }
-

@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import { Card } from '@/lib/types/card';
+import Image from "next/image";
+import { Card } from "@/lib/types/card";
 import { Button } from "@/components/ui/button";
 
 interface DeckCardProps {
@@ -9,29 +9,29 @@ interface DeckCardProps {
   onRemove: () => void;
 }
 
-export function DeckCard({ card, quantity, onAdd, onRemove }: DeckCardProps) {
+export function DeckCard({ card, quantity, onAdd, onRemove }: Readonly<DeckCardProps>) {
   return (
-    <div className="relative border rounded-lg p-2 flex flex-col items-center">
+    <div className="relative flex flex-col items-center rounded-lg border p-2">
       <Image
-        src={card.image_uris?.small || '/placeholder.svg'}
+        src={card.image_uris?.small || "/placeholder.svg"}
         alt={card.name}
         width={146}
         height={204}
-        className="rounded-lg mb-2"
+        className="mb-2 rounded-lg"
       />
-      <h3 className="text-sm font-semibold mb-1">{card.name}</h3>
-      <p className="text-xs mb-2">{card.type_line}</p>
-      <div className="flex justify-between w-full">
+      <h3 className="mb-1 text-sm font-semibold">{card.name}</h3>
+      <p className="mb-2 text-xs">{card.type_line}</p>
+      <div className="flex w-full justify-between">
         <Button
           onClick={onRemove}
-          className="bg-red-500 text-white px-2 py-1 rounded text-xs"
+          className="rounded bg-red-500 px-2 py-1 text-xs text-white"
         >
           -
         </Button>
         <span className="text-sm font-bold">{quantity}</span>
         <Button
           onClick={onAdd}
-          className="bg-green-500 text-white px-2 py-1 rounded text-xs"
+          className="rounded bg-green-500 px-2 py-1 text-xs text-white"
         >
           +
         </Button>
@@ -39,4 +39,3 @@ export function DeckCard({ card, quantity, onAdd, onRemove }: DeckCardProps) {
     </div>
   );
 }
-

@@ -1,8 +1,12 @@
-'use client';
+"use client";
 
-import { type ReactNode, createContext, useContext, useRef } from 'react';
-import { useStore } from 'zustand';
-import { createDeckStore, DeckStore, initDeckStore } from '@/lib/stores/deckStore';
+import { type ReactNode, createContext, useContext, useRef } from "react";
+import { useStore } from "zustand";
+import {
+  createDeckStore,
+  DeckStore,
+  initDeckStore,
+} from "@/lib/stores/deckStore";
 
 export type DeckStoreApi = ReturnType<typeof createDeckStore>;
 
@@ -29,7 +33,7 @@ export const useDeckStore = <T,>(selector: (store: DeckStore) => T): T => {
   const deckStoreContext = useContext(DeckStoreContext);
 
   if (!deckStoreContext) {
-    throw new Error('useDeckStore must be used within a DeckStoreProvider');
+    throw new Error("useDeckStore must be used within a DeckStoreProvider");
   }
 
   return useStore(deckStoreContext, selector);

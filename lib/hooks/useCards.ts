@@ -15,7 +15,6 @@ const cardOptions = (page: number) =>
     queryFn: () => fetchCards(page),
   });
 
-
 const cardCompareOptions = (card: string) =>
   queryOptions({
     queryKey: ["card", card],
@@ -35,10 +34,11 @@ const fetchAutoComplete = async (q: string): Promise<Array<string>> => {
   return data.data;
 };
 
-const fetchCard = async (name?: string, id?:string): Promise<Card> => {
+const fetchCard = async (name?: string, id?: string): Promise<Card> => {
   const response = await fetch(
-    id ? `https://api.scryfall.com/cards/${id}` :
-    `https://api.scryfall.com/cards/named?fuzzy=${name}`,
+    id
+      ? `https://api.scryfall.com/cards/${id}`
+      : `https://api.scryfall.com/cards/named?fuzzy=${name}`,
   );
   const data = await response.json();
   return data;

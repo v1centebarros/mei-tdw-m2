@@ -26,7 +26,7 @@ export const fetchInfiniteSearch = async (query: string, page: number) => {
   const data = await response.json();
 
   return data.data;
-}
+};
 
 const searchOptions = (query: string) =>
   queryOptions({
@@ -35,11 +35,12 @@ const searchOptions = (query: string) =>
     enabled: query.length > 0,
   });
 
-const infiniteSearchOptions = (query: string,page: number) => infiniteQueryOptions({
-  queryKey: ["search", query, page],
-  queryFn: ({ pageParam = page }) => fetchInfiniteSearch(query, pageParam),
-  initialPageParam: page,
-  getNextPageParam: (page) => page + 1,
-  enabled: query.length > 0
-})
+const infiniteSearchOptions = (query: string, page: number) =>
+  infiniteQueryOptions({
+    queryKey: ["search", query, page],
+    queryFn: ({ pageParam = page }) => fetchInfiniteSearch(query, pageParam),
+    initialPageParam: page,
+    getNextPageParam: (page) => page + 1,
+    enabled: query.length > 0,
+  });
 export { searchOptions, infiniteSearchOptions };

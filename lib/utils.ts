@@ -6,21 +6,21 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function buildQueryParts({
-                                  selectedCardTypes,
-                                  selectedColors,
-                                  selectedRarity,
-                                  power,
-                                  year,
-                                  price,
-                                  legalities
-                                }: {
-  selectedCardTypes: string[],
-  selectedColors: string[],
-  selectedRarity: string,
-  power: number[],
-  year: number[],
-  price: number[],
-  legalities: string[]
+  selectedCardTypes,
+  selectedColors,
+  selectedRarity,
+  power,
+  year,
+  price,
+  legalities,
+}: {
+  selectedCardTypes: string[];
+  selectedColors: string[];
+  selectedRarity: string;
+  power: number[];
+  year: number[];
+  price: number[];
+  legalities: string[];
 }): string {
   const parts = [];
   if (selectedCardTypes.length > 0) {

@@ -92,7 +92,7 @@ export function SearchBar() {
           id="search-results"
           className="absolute z-10 mt-1 max-h-60 w-full overflow-y-auto rounded-md border bg-white shadow-lg"
         >
-          {isLoading && <Spinner/>}
+          {isLoading && <Spinner />}
           {isError && (
             <li className="px-4 py-2 text-red-500">
               Error:{" "}

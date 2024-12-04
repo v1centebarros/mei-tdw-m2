@@ -10,8 +10,8 @@ import { CardStoreProvider } from "@/lib/providers/CardStoreProvider";
 import { DeckStoreProvider } from "@/lib/providers/DeckStoreProvider";
 
 export default function Providers({
-                                    children
-                                  }: Readonly<{
+  children,
+}: Readonly<{
   children: React.ReactNode;
 }>) {
   const queryClient = getQueryClient();

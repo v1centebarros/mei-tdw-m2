@@ -11,7 +11,7 @@ interface CardSearchProps {
   placeholder: string;
 }
 
-export function CardSearch({ onCardSelect, placeholder }: CardSearchProps) {
+export function CardSearch({ onCardSelect, placeholder }: Readonly<CardSearchProps>) {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [showResults, setShowResults] = useState(false);
@@ -19,7 +19,10 @@ export function CardSearch({ onCardSelect, placeholder }: CardSearchProps) {
   const resultsRef = useRef<HTMLUListElement>(null);
 
   const {
-    data: results = [], error, isLoading, isError
+    data: results = [],
+    error,
+    isLoading,
+    isError,
   } = useQuery(autoCompleteOptions(query));
 
   useEffect(() => {
@@ -58,12 +61,15 @@ export function CardSearch({ onCardSelect, placeholder }: CardSearchProps) {
 
   useEffect(() => {
     if (resultsRef.current && selectedIndex > -1) {
-      const selectedElement = resultsRef.current.children[selectedIndex] as HTMLElement;
+      const selectedElement = resultsRef.current.children[
+        selectedIndex
+      ] as HTMLElement;
       selectedElement.scrollIntoView({ block: "nearest" });
     }
   }, [selectedIndex]);
 
-  return (<div className="relative w-full max-w-md">
+  return (
+    <div className="relative w-full max-w-md">
       <div className="relative">
         <input
           ref={inputRef}
@@ -76,36 +82,47 @@ export function CardSearch({ onCardSelect, placeholder }: CardSearchProps) {
           aria-label={placeholder}
           aria-autocomplete="list"
           aria-controls="search-results"
-          aria-activedescendant={selectedIndex > -1 ? `result-${selectedIndex}` : undefined}
+          aria-activedescendant={
+            selectedIndex > -1 ? `result-${selectedIndex}` : undefined
+          }
         />
         <Search
           className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-400"
           size={20}
         />
       </div>
-      {showResults && (<ul
+      {showResults && (
+        <ul
           ref={resultsRef}
           id="search-results"
           className="absolute z-10 mt-1 max-h-60 w-full overflow-y-auto rounded-md border bg-white shadow-lg"
         >
           {isLoading && <Spinner />}
-          {isError && (<li className="px-4 py-2 text-red-500">
+          {isError && (
+            <li className="px-4 py-2 text-red-500">
               Error:{" "}
               {error instanceof Error ? error.message : "An error occurred"}
-            </li>)}
+            </li>
+          )}
           {!isLoading && !isError && results.length === 0 && (
-            <li className="px-4 py-2 text-gray-500">No results found</li>)}
-          {!isLoading && !isError && results.map((result, index) => (<li
-              key={result}
-              id={`result-${index}`}
-              onClick={() => handleResultClick(result)}
-              className={`cursor-pointer px-4 py-2 ${index === selectedIndex ? "bg-blue-100" : "hover:bg-gray-100"}`}
-              role="option"
-              aria-selected={index === selectedIndex}
-            >
-              {result}
-            </li>))}
-        </ul>)}
-    </div>);
+            <li className="px-4 py-2 text-gray-500">No results found</li>
+          )}
+          {!isLoading &&
+            !isError &&
+            results.map((result, index) => (
+              <li
+                key={result}
+                id={`result-${index}`}
+                onClick={() => handleResultClick(result)}
+                className={`cursor-pointer px-4 py-2 ${index === selectedIndex ? "bg-blue-100" : "hover:bg-gray-100"}`}
+                role="option"
+                aria-selected={index === selectedIndex}
+              >
+                {result}
+              </li>
+            ))}
+        </ul>
+      )}
+    </div>
+  );
 }
-

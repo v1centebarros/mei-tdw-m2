@@ -12,7 +12,6 @@ type PageProps = {
 };
 
 export default async function Page({ searchParams }: Readonly<PageProps>) {
-
   const {
     selectedColors,
     selectedCardTypes,
@@ -21,21 +20,31 @@ export default async function Page({ searchParams }: Readonly<PageProps>) {
     year,
     price,
     legalities,
-    page
+    page,
   } = await advancedSearchParamsCache.parse(searchParams);
 
   const queryClient = getQueryClient();
 
-  void queryClient.prefetchInfiniteQuery(infiniteSearchOptions(buildQueryParts({
-    selectedCardTypes, selectedColors, selectedRarity, power, year, price, legalities
-  }), page));
+  void queryClient.prefetchInfiniteQuery(
+    infiniteSearchOptions(
+      buildQueryParts({
+        selectedCardTypes,
+        selectedColors,
+        selectedRarity,
+        power,
+        year,
+        price,
+        legalities,
+      }),
+      page,
+    ),
+  );
 
-  return (<Suspense>
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <AdvancedSearch />
-    </HydrationBoundary>
-  </Suspense>);
-
-
+  return (
+    <Suspense>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <AdvancedSearch />
+      </HydrationBoundary>
+    </Suspense>
+  );
 }
-

@@ -12,7 +12,7 @@ import {
 import { useSettingsStore } from "@/lib/stores/settingsStore";
 
 export default function SettingsDropdown() {
-  const {  currency, setCurrency } = useSettingsStore();
+  const { currency, setCurrency } = useSettingsStore();
 
   return (
     <DropdownMenuContent align="end">
