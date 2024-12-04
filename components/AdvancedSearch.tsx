@@ -2,7 +2,7 @@
 import { parseAsArrayOf, parseAsInteger, useQueryState } from "nuqs";
 import { parseAsString } from "nuqs/server";
 import React, { Fragment, Suspense, useEffect, useMemo } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { infiniteSearchOptions } from "@/lib/hooks/useSearch";
 import { useInView } from "react-intersection-observer";
 import Container from "@/components/Container";
@@ -15,9 +15,11 @@ import { Spinner } from "@/components/ui/spinner";
 import { Card as CardType } from "@/lib/types/card";
 import CardContextMenu from "@/components/CardContextMenu";
 import { Card } from "@/components/Card";
+import { buildQueryParts } from "@/lib/utils";
 
 
 export default function AdvancedSearch() {
+
   const [selectedColors, setSelectedColors] = useQueryState("colors", parseAsArrayOf(parseAsString).withDefault([]));
   const [selectedCardTypes, setSelectedCardTypes] = useQueryState("cardTypes", parseAsArrayOf(parseAsString).withDefault([]));
   const [selectedRarity, setSelectedRarity] = useQueryState("rarity", parseAsString.withDefault(""));
@@ -26,36 +28,21 @@ export default function AdvancedSearch() {
   const [price, setPrice] = useQueryState("price", parseAsArrayOf(parseAsInteger).withDefault([0, 800]));
   const [legalities, setLegalities] = useQueryState("legalities", parseAsArrayOf(parseAsString).withDefault([]));
   const [page] = useQueryState("page", parseAsInteger.withDefault(1));
-  const query = useMemo(() => {
-    const parts = [];
 
-    if (selectedCardTypes.length > 0) {
-      parts.push("t:" + selectedCardTypes.join("+t:"));
-    }
-    if (selectedColors.length > 0) {
-      parts.push("c:" + selectedColors.join(" "));
-    }
-    if (selectedRarity.length > 0) {
-      parts.push("r:" + selectedRarity);
-    }
-    if (power[0] !== 0 || power[1] !== 10) {
-      parts.push(`pow>=${power[0]}+pow<=${power[1]}`);
-    }
-    if (year[0] !== 1993 || year[1] !== 2024) {
-      parts.push(`year>=${year[0]}+year<=${year[1]}`);
-    }
-    if (price[0] !== 0 || price[1] !== 800) {
-      parts.push(`usd>=${price[0]}+usd<=${price[1]}`);
-    }
-    if (legalities.length > 0) {
-      parts.push("f:" + legalities.join("+f:"));
-    }
-    return parts.join("+");
-  }, [selectedColors, selectedCardTypes, selectedRarity, power, year, price, legalities]);
+
+  const query = useMemo(() => buildQueryParts({
+    selectedCardTypes,
+    selectedColors,
+    selectedRarity,
+    power,
+    year,
+    price,
+    legalities
+  }), [selectedColors, selectedCardTypes, selectedRarity, power, year, price, legalities]);
 
   const {
     data, isFetching, isFetchingNextPage, isLoading, isSuccess, fetchNextPage, hasNextPage
-  } = useInfiniteQuery(infiniteSearchOptions(query, page));
+  } = useSuspenseInfiniteQuery(infiniteSearchOptions(query, page));
   const { ref, inView } = useInView();
   useEffect(() => {
     if (inView) {
