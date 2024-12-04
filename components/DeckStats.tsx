@@ -34,7 +34,7 @@ export function DeckStats({ deck }: DeckStatsProps) {
   );
 
   return (
-    <div className="bg-gray-100 p-4 rounded-lg">
+    <div className="border p-4 rounded-lg">
       <h2 className="text-xl font-bold mb-4">Deck Statistics</h2>
       <div className="grid grid-cols-2 gap-4">
         <div>
@@ -62,7 +62,9 @@ export function DeckStats({ deck }: DeckStatsProps) {
         <div>
           <h3 className="font-semibold">Type Distribution:</h3>
           <ul>
-            {Object.entries(typeCounts).map(([type, count]) => (
+            {Object.entries(typeCounts)
+              .filter(([type]) => !['—', '//'].includes(type))
+              .map(([type, count]) => (
               <li key={type}>
                 {type}: {count}
               </li>
